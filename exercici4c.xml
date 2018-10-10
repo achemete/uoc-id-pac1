@@ -1,0 +1,141 @@
+<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"  PolicyId="1" 
+  RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:first-applicable" 
+  Version="1.0">
+    <Description>Modified Poliicy by Hector</Description>
+    <Target></Target>
+    <Rule Effect="Permit" RuleId="Rule Permit #1">
+      <Target>
+        <AnyOf>
+          <AllOf>
+            <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
+              <AttributeValue 
+    DataType="http://www.w3.org/2001/XMLSchema#string">printer
+              </AttributeValue>
+              <AttributeDesignator 
+    AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" 
+    Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" 
+    DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+        </AttributeDesignator>
+            </Match>
+            <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue 
+                DataType="http://www.w3.org/2001/XMLSchema#string">print
+        </AttributeValue>
+              <AttributeDesignator 
+    AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" 
+    Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" 
+    DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+        </AttributeDesignator>
+            </Match>
+          </AllOf>
+        </AnyOf>
+      </Target>
+      <Condition>
+        <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+          <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-bag">
+            <AttributeValue  
+              DataType="http://www.w3.org/2001/XMLSchema#string">employee 
+           </AttributeValue>
+          </Apply>
+          <AttributeDesignator 
+            AttributeId="group" 
+      Category="urn:oasis:names:tc:xacml:3.0:group" 
+      DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+          </AttributeDesignator>
+        </Apply>
+      </Condition>
+   </Rule>
+   <Rule Effect="Permit" RuleId="Rule Permit #2">
+      <Target>
+        <AnyOf>
+          <AllOf>
+            <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
+              <AttributeValue 
+    DataType="http://www.w3.org/2001/XMLSchema#string">printer
+              </AttributeValue>
+              <AttributeDesignator 
+    AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" 
+    Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" 
+    DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+        </AttributeDesignator>
+            </Match>
+            <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue 
+                DataType="http://www.w3.org/2001/XMLSchema#string">print
+        </AttributeValue>
+              <AttributeDesignator 
+    AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" 
+    Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" 
+    DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+        </AttributeDesignator>
+            </Match>
+          </AllOf>
+        </AnyOf>
+
+<AnyOf>
+          <AllOf>
+            <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
+              <AttributeValue 
+    DataType="http://www.w3.org/2001/XMLSchema#string">printer
+              </AttributeValue>
+              <AttributeDesignator 
+    AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" 
+    Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" 
+    DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+        </AttributeDesignator>
+            </Match>
+            <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue 
+                DataType="http://www.w3.org/2001/XMLSchema#string">configure
+        </AttributeValue>
+              <AttributeDesignator 
+    AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" 
+    Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" 
+    DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+        </AttributeDesignator>
+            </Match>
+          </AllOf>
+        </AnyOf>
+
+  <AnyOf>
+          <AllOf>
+            <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
+              <AttributeValue 
+    DataType="http://www.w3.org/2001/XMLSchema#string">printer
+              </AttributeValue>
+              <AttributeDesignator 
+    AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" 
+    Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" 
+    DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+        </AttributeDesignator>
+            </Match>
+            <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+              <AttributeValue 
+                DataType="http://www.w3.org/2001/XMLSchema#string">reset
+        </AttributeValue>
+              <AttributeDesignator 
+    AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" 
+    Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" 
+    DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+        </AttributeDesignator>
+            </Match>
+          </AllOf>
+        </AnyOf>
+      </Target>
+      <Condition>
+        <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+          <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-bag">
+            <AttributeValue  
+              DataType="http://www.w3.org/2001/XMLSchema#string">administrator 
+           </AttributeValue>
+          </Apply>
+          <AttributeDesignator 
+            AttributeId="group" 
+      Category="urn:oasis:names:tc:xacml:3.0:group" 
+      DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+          </AttributeDesignator>
+        </Apply>
+      </Condition>
+   </Rule>
+   <Rule Effect="Deny" RuleId="Rule Deny #1"></Rule>
+</Policy>

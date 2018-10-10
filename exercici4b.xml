@@ -1,0 +1,104 @@
+<Policy xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17"  PolicyId="1" 
+  RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:first-applicable" 
+  Version="1.0">
+
+Defineix la política i determina l’algorisme que s’utilitzarà per poder processar les diferents regles que ens trobem a continuació.
+ 
+    <Description>My First Policy </Description>
+
+Dóna una descripció a la política.
+
+    <Target></Target>
+
+No especifica target.
+
+    <Rule Effect="Permit" RuleId="Rule Permit #1">
+
+Defineix la regla que es durà a terme en cas de que l’algorisme determini que s’ha d’executar aquesta. 
+      
+      <Target>
+
+Ara sí que especifica un target per a la regla. Aquest serà el que rebrà les conseqüències de l’execució.
+
+        <AnyOf>
+
+Descriu que els elements sota d’ anyof, tindran una sequencia disjuntiva sobre objectes que continguin l’ AllOf.
+
+          <AllOf>
+
+Descriu els elements continguts per AllOf, tintran una sequencia conjuntiva dels elements match.
+
+            <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-regexp-match">
+
+Defineix i descriu les entitats dels atributs, els quals hauran de coincidir (match) per a poder considerar que és vàlid.
+             
+              <AttributeValue 
+		DataType="http://www.w3.org/2001/XMLSchema#string">printer
+              </AttributeValue>
+
+Especifica el tipus de dades que conté l’atribut printer.
+
+              <AttributeDesignator 
+		AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" 
+		Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" 
+		DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+	      </AttributeDesignator>
+
+Defineix l’id de l’atribut, la categoria i el tipus de dades. L’atribut MustBePresent, requereix que el DataType estigui present, de no ser-hi, s’invalidarà la regla.
+
+            </Match>
+            <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+
+Es torna a definir el match amb els diferents atributs. En qualsevol cas, s’aprecia que hi ha un canvi a la definició del MatchId, en comptes d’aplicar un match a partir d’una expressió regular, la funció que s’utilitza és un string equal.
+
+              <AttributeValue 
+                DataType="http://www.w3.org/2001/XMLSchema#string">print
+	      </AttributeValue>
+              <AttributeDesignator 
+		AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" 
+		Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" 
+		DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+	      </AttributeDesignator>
+
+Novament es descriuen els diferents atributs que pot tenir aquesta impressora, hi ha canvis respecte l’anterior match. La ID i la categoria són diferents, el DataType segueix sent imprescindible.
+
+            </Match>
+          </AllOf>
+        </AnyOf>
+      </Target>
+      <Condition>
+
+Aquest valor és opcional però aquesta política el mostra. Es sol trobar just al final de la definició d’una regla i especifica una serie de condicions que s’han de satisfer per un (o més d’un) rol per a que es pugui executar la regla sobre el target especificat.
+
+        <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+
+El tag Apply denota l’aplicació de la funció amb els seus respectius arguments, és a dir, crida a executar la funció. En aquest cas, el filtre que s’executarà és que, de tots els strings que seran recollits a continuació, almenys un d’ells sigui membre dels rols que s’exposen. 
+
+
+          <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-bag">
+
+El mateix que l’anterior però aquesta funció el que farà, serà recollir els valors dels atributs d’acontinuació.
+
+            <AttributeValue  
+              DataType="http://www.w3.org/2001/XMLSchema#string">employee 
+           </AttributeValue>
+	   <AttributeValue 
+	      DataType="http://www.w3.org/2001/XMLSchema#string">administrator
+            </AttributeValue>
+          </Apply>
+          <AttributeDesignator 
+            AttributeId="group" 
+	    Category="urn:oasis:names:tc:xacml:3.0:group" 
+	    DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true">
+          </AttributeDesignator>
+
+AttributeDesignator agafarà una “bag” referent a la id group i sota la categoria group. Com ja s’ha vist abans, el tipus de dades és obligatori que estigui present per a que les diferents regles puguin ser avaluades.
+
+        </Apply>
+      </Condition>
+   </Rule>
+   <Rule Effect="Deny" RuleId="Rule Deny #1"></Rule>
+
+Regla de deny per si no es pogués aplicar la primera regla.
+
+</Policy>
